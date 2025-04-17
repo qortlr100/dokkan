@@ -3,6 +3,10 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
+# 빌드 시 환경 변수 설정
+ARG NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+
 # 패키지 파일 복사
 COPY package*.json ./
 
@@ -19,6 +23,10 @@ RUN npm run build
 FROM node:20-alpine AS runner
 
 WORKDIR /app
+
+# 런타임 환경 변수 설정
+ARG NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 
 # 필요한 파일만 복사
 COPY --from=builder /app/next.config.js ./

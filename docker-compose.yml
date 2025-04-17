@@ -18,11 +18,12 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_API_URL=${API_HOST:-http://localhost}:43000
     ports:
       - "40080:3000"
     environment:
       - NODE_ENV=production
-      # 브라우저에서 접근하는 URL (window.location.hostname 기준)
       - NEXT_PUBLIC_API_URL=${API_HOST:-http://localhost}:43000
     depends_on:
       - backend

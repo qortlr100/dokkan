@@ -1,17 +1,18 @@
 import axios from 'axios';
 import { CardQueryParams, CardResponse, AuthResponse } from './types';
 
-// 브라우저 환경에서는 현재 호스트를 기반으로 API URL 설정
-const API_BASE_URL = typeof window !== 'undefined'
-  ? process.env.NEXT_PUBLIC_API_URL || `${window.location.protocol}//${window.location.hostname}:43000`
-  : process.env.NEXT_PUBLIC_API_URL;
-
-if (!API_BASE_URL) {
-  throw new Error('API_BASE_URL is not set');
-}
+// API URL 설정
+const getApiBaseUrl = () => {
+  // 브라우저 환경
+  if (typeof window !== 'undefined') {
+    return process.env.NEXT_PUBLIC_API_URL || `${window.location.protocol}//${window.location.hostname}:43000`;
+  }
+  // 서버 사이드 렌더링 환경
+  return process.env.NEXT_PUBLIC_API_URL || 'http://backend:3000';
+};
 
 const api = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: getApiBaseUrl(),
   headers: {
     'Content-Type': 'application/json',
   },
