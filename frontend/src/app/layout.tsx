@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Link from "next/link";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,11 +21,11 @@ export default function RootLayout({
         <nav className="bg-blue-600 text-white">
           <div className="container mx-auto px-4 py-4">
             <div className="flex justify-between items-center">
-              <a href="/" className="text-xl font-bold">독칸 뷰어</a>
+              <Link href="/" className="text-xl font-bold">독칸 뷰어</Link>
               <div className="space-x-4">
-                <a href="/cards" className="hover:text-blue-200">카드</a>
-                <a href="/categories" className="hover:text-blue-200">카테고리</a>
-                <a href="/admin" className="hover:text-blue-200">관리자</a>
+                <Link href="/cards" className="hover:text-blue-200">카드</Link>
+                <Link href="/categories" className="hover:text-blue-200">카테고리</Link>
+                <Link href="/admin" className="hover:text-blue-200">관리자</Link>
               </div>
             </div>
           </div>

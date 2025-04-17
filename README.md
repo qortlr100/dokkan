@@ -70,3 +70,55 @@ dokkan/
 ## 데이터베이스
 
 SQLite 데이터베이스는 `data/database.db`에 위치합니다.
+
+## Docker 배포 환경
+
+### 요구사항
+- Docker
+- Docker Compose
+
+### 설치 및 실행
+
+1. 저장소 클론
+```bash
+git clone https://github.com/your-username/dokkan.git
+cd dokkan
+```
+
+2. Docker 컨테이너 실행
+```bash
+docker-compose up -d
+```
+
+3. 접속
+- 프론트엔드: http://localhost:40080
+- 백엔드 API: http://localhost:43000/api
+
+### 포트 설정
+- 프론트엔드: 40080 (외부) -> 3000 (내부)
+- 백엔드: 43000 (외부) -> 3000 (내부)
+
+### 컨테이너 관리
+- 컨테이너 상태 확인: `docker-compose ps`
+- 로그 확인: `docker-compose logs -f`
+- 컨테이너 중지: `docker-compose down`
+- 컨테이너 재빌드: `docker-compose up -d --build`
+
+## 개발 환경 설정
+
+### 프론트엔드
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+### 백엔드
+```bash
+cd backend
+npm install
+npm run dev
+```
+
+## 라이선스
+MIT License
