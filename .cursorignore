@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# TypeScript
+*.tsbuildinfo
+
+# Game resources
+resources/*
+!resources/.gitkeep
