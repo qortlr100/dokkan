@@ -1,12 +1,17 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
 # Cursor AI 어시스턴트 규칙
 
 ## 1. PRD 기반 작업
-- 모든 작업은 `PRD.md`의 내용을 기반으로 진행
+- 모든 작업은 [PRD.md](mdc:.cursor/PRD.md)의 내용을 기반으로 진행
 - 프로젝트의 목표, 핵심 기능, 기술 스택, 일정 등을 항상 고려
 - 화면/페이지 구성 요구사항 준수
 
 ## 2. 작업 마무리 시 task.md 업데이트
-- 작업 완료 시 자동으로 `task.md` 파일 업데이트
+- 작업 완료 시 자동으로 [task.md](mdc:.cursor/task.md) 파일 업데이트
 - 진행된 작업 내용 요약 작성
 - 완료된 작업 항목 체크 표시
 - 다음 진행 예정 작업 업데이트
@@ -18,7 +23,7 @@
 - Windows 경로 구분자 등 환경 고려
 
 ## 4. Docker 관련 규칙
-- docker-compose.yml 파일 작성 시 version 필드 사용 금지
+- [docker-compose.yml](mdc:docker-compose.yml) 파일 작성 시 Version 필드 사용 금지
 - 최신 Docker Compose 문법 사용
 
 ## 5. 일반 규칙

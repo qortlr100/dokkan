@@ -6,9 +6,12 @@ yarn.lock
 # Build outputs
 dist/
 build/
+.next/
+out/
 
 # TypeScript
 *.tsbuildinfo
+next-env.d.ts
 
 # Logs
 logs/
@@ -21,6 +24,9 @@ yarn-error.log*
 .env
 .env.local
 .env.*.local
+.env.development
+.env.test
+.env.production
 
 # IDE
 .idea/
@@ -55,4 +61,10 @@ resources/*
 *.sqlite3
 
 # Docker
-.docker/ 
+.docker/
+
+# Next.js specific
+.vercel
+.turbo
+public/sw.js
+public/workbox-*.js 
