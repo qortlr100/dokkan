@@ -11,7 +11,7 @@ build/
 *.tsbuildinfo
 
 # Logs
-logs
+logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
@@ -45,5 +45,14 @@ data/*
 # Game resources
 resources/*
 !resources/.gitkeep
-!resources/*/
-resources/*/* 
+
+# Docker
+.docker/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Docker
+.docker/ 

@@ -17,7 +17,11 @@
 - PowerShell 문법 준수
 - Windows 경로 구분자 등 환경 고려
 
-## 4. 일반 규칙
+## 4. Docker 관련 규칙
+- docker-compose.yml 파일 작성 시 version 필드 사용 금지
+- 최신 Docker Compose 문법 사용
+
+## 5. 일반 규칙
 - 모든 응답은 한국어로 작성
 - 코드 변경 시 적절한 도구 사용
 - 사용자 요청에 대한 명확한 설명 제공

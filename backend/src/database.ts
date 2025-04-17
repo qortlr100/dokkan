@@ -1,7 +1,12 @@
 import sqlite3 from 'sqlite3';
 import { Database } from 'sqlite3';
+import path from 'path';
 
-const db = new sqlite3.Database('../data/database.db', (err) => {
+// Docker 컨테이너 내부의 /data 디렉토리를 사용
+const dbPath = '/data/database.db';
+
+const db = new sqlite3.Database(dbPath, (err) => {
+    console.log('데이터베이스 경로:', dbPath);
     if (err) {
         console.error('데이터베이스 연결 오류:', err);
     } else {
