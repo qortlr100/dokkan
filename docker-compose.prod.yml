@@ -20,12 +20,12 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        - NEXT_PUBLIC_API_URL=${API_HOST:-http://localhost}:43000
+        - NEXT_PUBLIC_API_URL=https://dokkan.cid.wiki/api
     ports:
       - "40080:3000"
     environment:
       - NODE_ENV=production
-      - NEXT_PUBLIC_API_URL=${API_HOST:-http://localhost}:43000
+      - NEXT_PUBLIC_API_URL=https://dokkan.cid.wiki/api
     depends_on:
       - backend
     networks:
