@@ -1,7 +1,11 @@
 import axios from 'axios';
 import { CardQueryParams, CardResponse, AuthResponse } from './types';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:43000/api';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+
+if (!API_BASE_URL) {
+  throw new Error('NEXT_PUBLIC_API_URL environment variable is not set');
+}
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -21,18 +25,18 @@ api.interceptors.request.use((config) => {
 
 // 카드 관련 API
 export const getCards = async (params: CardQueryParams): Promise<CardResponse> => {
-  const response = await api.get('/cards', { params });
+  const response = await api.get('/api/cards', { params });
   return response.data;
 };
 
 export const getCardById = async (id: number) => {
-  const response = await api.get(`/cards/${id}`);
+  const response = await api.get(`/api/cards/${id}`);
   return response.data;
 };
 
 // 카테고리 관련 API
 export const getCategories = async () => {
-  const response = await api.get('/categories');
+  const response = await api.get('/api/categories');
   return response.data;
 };
 
