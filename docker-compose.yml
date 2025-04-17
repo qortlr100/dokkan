@@ -7,6 +7,7 @@ services:
       - "43000:3000"
     environment:
       - NODE_ENV=production
+      - HOST=0.0.0.0
     restart: unless-stopped
     networks:
       - dokkan-network
@@ -21,7 +22,8 @@ services:
       - "40080:3000"
     environment:
       - NODE_ENV=production
-      - NEXT_PUBLIC_API_URL=http://localhost:43000
+      # 브라우저에서 접근하는 URL (window.location.hostname 기준)
+      - NEXT_PUBLIC_API_URL=${API_HOST:-http://localhost}:43000
     depends_on:
       - backend
     networks:

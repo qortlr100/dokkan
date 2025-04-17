@@ -1,10 +1,13 @@
 import axios from 'axios';
 import { CardQueryParams, CardResponse, AuthResponse } from './types';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+// 브라우저 환경에서는 현재 호스트를 기반으로 API URL 설정
+const API_BASE_URL = typeof window !== 'undefined'
+  ? process.env.NEXT_PUBLIC_API_URL || `${window.location.protocol}//${window.location.hostname}:43000`
+  : process.env.NEXT_PUBLIC_API_URL;
 
 if (!API_BASE_URL) {
-  throw new Error('NEXT_PUBLIC_API_URL environment variable is not set');
+  throw new Error('API_BASE_URL is not set');
 }
 
 const api = axios.create({
