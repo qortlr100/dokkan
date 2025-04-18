@@ -4,16 +4,12 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install
+RUN npm install --production
 
 COPY . .
 
 RUN npm run build
 
-# Create data directory and set permissions
-RUN mkdir -p /data && \
-    chown -R node:node /data
+USER node
 
-EXPOSE 3000
-
-CMD ["npm", "start"] 
+CMD ["node", "dist/server.js"] 
