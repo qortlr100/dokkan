@@ -5,7 +5,7 @@ import { CardQueryParams, CardResponse, AuthResponse } from './types';
 const getApiBaseUrl = () => {
   // 브라우저 환경
   if (typeof window !== 'undefined') {
-    return process.env.NEXT_PUBLIC_API_URL || `${window.location.protocol}//${window.location.hostname}:3000`;
+    return process.env.NEXT_PUBLIC_API_URL || window.location.origin;
   }
   // 서버 사이드 렌더링 환경
   return process.env.NEXT_PUBLIC_API_URL || 'http://backend:3000';
