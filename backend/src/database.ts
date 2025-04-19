@@ -31,6 +31,7 @@ export interface CardQueryParams {
     rarity?: string;
     type?: string;
     search?: string;
+    idPrefix?: string;
 }
 
 export function getCards(params: CardQueryParams = {}): Promise<{ cards: Card[], total: number }> {
@@ -41,7 +42,8 @@ export function getCards(params: CardQueryParams = {}): Promise<{ cards: Card[],
         sortOrder = 'DESC',
         rarity,
         type,
-        search
+        search,
+        idPrefix
     } = params;
 
     const offset = (page - 1) * limit;
@@ -52,6 +54,9 @@ export function getCards(params: CardQueryParams = {}): Promise<{ cards: Card[],
     const endDate = new Date(new Date().getFullYear() + 1, 11, 31); // 내년 12월 31일
     conditions.push('open_at <= ?');
     queryParams.push(endDate.toISOString().split('T')[0]);
+
+    // ID의 마지막 자리가 0인 카드만 필터링
+    conditions.push('id % 10 = 0');
 
     if (rarity) {
         conditions.push('rarity = ?');
@@ -66,6 +71,11 @@ export function getCards(params: CardQueryParams = {}): Promise<{ cards: Card[],
     if (search) {
         conditions.push('name LIKE ?');
         queryParams.push(`%${search}%`);
+    }
+
+    if (idPrefix) {
+        conditions.push('CAST(id AS TEXT) LIKE ?');
+        queryParams.push(`${idPrefix}%`);
     }
 
     const whereClause = conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : '';

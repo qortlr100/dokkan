@@ -22,7 +22,8 @@ app.get('/api/cards', async (req, res) => {
             sortOrder: req.query.sortOrder as 'ASC' | 'DESC',
             rarity: req.query.rarity as string,
             type: req.query.type as string,
-            search: req.query.search as string
+            search: req.query.search as string,
+            idPrefix: req.query.idPrefix as string
         };
 
         const result = await getCards(queryParams);

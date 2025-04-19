@@ -6,7 +6,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "드래곤볼 독칸 배틀 카드 뷰어",
+  title: "DRAGONBALL Z 폭렬격전",
   description: "드래곤볼 독칸 배틀의 카드 정보를 확인할 수 있는 웹사이트입니다.",
 };
 
@@ -21,7 +21,7 @@ export default function RootLayout({
         <nav className="bg-blue-600 text-white">
           <div className="container mx-auto px-4 py-4">
             <div className="flex justify-between items-center">
-              <Link href="/" className="text-xl font-bold">독칸 뷰어</Link>
+              <Link href="/" className="text-xl font-bold">DRAGONBALL Z 폭렬격전</Link>
               <div className="space-x-4">
                 <Link href="/cards" className="hover:text-blue-200">카드</Link>
                 <Link href="/categories" className="hover:text-blue-200">카테고리</Link>

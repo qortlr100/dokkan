@@ -25,6 +25,7 @@ export interface CardQueryParams {
   type?: string;
   category?: string;
   search?: string;
+  idPrefix?: string;
 }
 
 export interface CardResponse {

@@ -1,5 +1,6 @@
 import { Card } from './types';
-import { getRarityInfo, getRarityCode } from '@/constants/rarityMappings';
+import { getRarityInfo } from '@/constants/resourceMappings';
+import { getElementInfo } from '@/constants/resourceMappings';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:43000';
 
@@ -16,22 +17,24 @@ const loadImage = (src: string): Promise<HTMLImageElement> => {
 
 export const getCharacterThumbnailLayers = (card: Card) => {
   // 요소와 레어리티 정보 가져오기
-  // 마지막 숫자 추출 (1의 자리)
-  const elementLastDigit = card.element % 10;
+  const elementInfo = getElementInfo(card.element);
   const rarityInfo = getRarityInfo(card.rarity);
 
-  // 배경 이미지 경로
-  const bgPath = `${API_URL}/resources/layout/ko/image/character/character_thumb_bg/cha_base_${elementLastDigit.toString().padStart(2, '0')}_${card.rarity.toString().padStart(2, '0')}.png`;
+  // 카드 ID의 마지막 자리수를 0으로 변경
+  const modifiedCardId = Math.floor(card.id / 10) * 10;
 
-  // 캐릭터 썸네일 경로
-  const thumbPath = `${API_URL}/resources/character/thumb/card_${card.id}_thumb.png`;
+  // 배경 이미지 경로
+  const bgPath = `${API_URL}/resources/layout/ko/image/character/character_thumb_bg/cha_base_${elementInfo?.typeCode.toString().padStart(2, '0')}_${card.rarity.toString().padStart(2, '0')}.png`;
+
+  // 캐릭터 썸네일 경로 (수정된 ID 사용)
+  const thumbPath = `${API_URL}/resources/character/thumb/card_${modifiedCardId}_thumb.png`;
 
   // 타입 아이콘 경로
-  const typeIconPath = `${API_URL}/resources/layout/ko/image/character/cha_type_icon_${card.element.toString().padStart(2, '0')}.png`;
+  const elementIconPath = `${API_URL}/resources/layout/ko/image/character/cha_type_icon_${elementInfo?.id.toString().padStart(2, '0')}.png`;
 
   // 레어리티 아이콘 경로
   const rarityIconPath = rarityInfo
-    ? `${API_URL}/resources/layout/ko/image/character/cha_rare_sm_${rarityInfo.en}.png`
+    ? `${API_URL}/resources/layout/ko/image/character/cha_rare_sm_${rarityInfo.name.toLowerCase()}.png`
     : null;
 
   // 기본 이미지 경로
@@ -40,7 +43,7 @@ export const getCharacterThumbnailLayers = (card: Card) => {
   return {
     background: bgPath,
     character: thumbPath,
-    typeIcon: typeIconPath,
+    elementIcon: elementIconPath,
     rarityIcon: rarityIconPath,
     emptyImage: emptyImagePath,
   };
@@ -75,8 +78,8 @@ export const generateThumbnail = async (card: Card): Promise<string> => {
     ctx.drawImage(characterImage, 6, 12, characterImage.width, characterImage.height);
     
     // 타입 아이콘 그리기 (지정된 위치와 크기로)
-    const typeIconImage = await loadImage(layers.typeIcon);
-    ctx.drawImage(typeIconImage, 173, 13, 96, 96);
+    const elementIconImage = await loadImage(layers.elementIcon);
+    ctx.drawImage(elementIconImage, 173, 13, 96, 96);
     
     // 레어리티 아이콘 그리기 (원본 크기의 2배로)
     if (layers.rarityIcon) {
