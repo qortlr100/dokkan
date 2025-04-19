@@ -2,36 +2,45 @@ services:
   backend:
     build: 
       context: ./backend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     ports:
       - "43000:3000"
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=development
       - HOST=0.0.0.0
     restart: unless-stopped
     networks:
       - dokkan-network
     volumes:
+      - ./backend:/app
+      - /app/node_modules
       - ./data:/data
       - ./resources:/app/resources
-    container_name: dokkan-backend
+    container_name: dokkan-backend-dev
 
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     ports:
       - "40080:3000"
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://localhost:43000
+      - WATCHPACK_POLLING=true
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - ./frontend:/app:delegated
+      - /app/node_modules
+      - /app/.next
     depends_on:
       - backend
     networks:
       - dokkan-network
     restart: unless-stopped
-    container_name: dokkan-frontend
+    container_name: dokkan-frontend-dev
 
 networks:
   dokkan-network:
-    name: dokkan-network
+    name: dokkan-network-dev
     driver: bridge 
