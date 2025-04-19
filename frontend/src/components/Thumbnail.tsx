@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Card } from '@/lib/types';
 import { generateThumbnail } from '@/lib/imageUtils';
+import Image from 'next/image';
 
 interface ThumbnailProps {
   card: Card;
@@ -53,13 +54,13 @@ export const Thumbnail = ({
       
       {!isLoading && !error && thumbnailUrl && (
         <div className="flex items-center justify-center w-full h-full">
-          <img
+          <Image
             src={thumbnailUrl}
             alt={card.name}
+            width={width}
+            height={height}
             className="object-contain"
             style={{
-              width: '100%',
-              height: '100%',
               objectFit: 'contain',
               objectPosition: 'center'
             }}

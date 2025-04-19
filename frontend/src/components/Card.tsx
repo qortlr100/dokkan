@@ -1,6 +1,7 @@
 import React from 'react';
 import { getElementInfo, getElementName } from '@/constants/resourceMappings';
 import { getElementColor } from '@/lib/colorUtils';
+import Image from 'next/image';
 
 interface CardProps {
   card: {
@@ -18,7 +19,13 @@ const Card: React.FC<CardProps> = ({ card }) => {
   return (
     <div className="card" style={{ borderColor: elementColor }}>
       <div className="card-image">
-        <img src={card.imageUrl} alt={card.name} />
+        <Image
+          src={card.imageUrl}
+          alt={card.name}
+          width={300}
+          height={300}
+          priority
+        />
       </div>
       <div className="card-info">
         <h3>{card.name}</h3>

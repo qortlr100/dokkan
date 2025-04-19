@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { Card, CardQueryParams } from '@/lib/types';
+import { Card } from '@/lib/types';
 import { getCards } from '@/lib/api';
 
 interface CardStore {

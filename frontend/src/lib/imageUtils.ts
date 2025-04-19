@@ -94,7 +94,7 @@ export const generateThumbnail = async (card: Card): Promise<string> => {
     }
     
     return canvas.toDataURL('image/png', 1.0); // 최상의 품질로 설정
-  } catch (error) {
+  } catch {
     // 에러 발생 시 빈 이미지를 배경 이미지와 동일한 위치와 크기로 그리기
     const emptyImage = await loadImage(layers.emptyImage);
     ctx.drawImage(emptyImage, BG_X, BG_Y, BG_WIDTH, BG_HEIGHT);
