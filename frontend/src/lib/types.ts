@@ -1,8 +1,10 @@
 export interface Card {
   id: number;
   name: string;
-  rarity: string;
+  rarity: number;
+  rarity_en: string;
   type: string;
+  element: number;
   category: string[];
   linkSkills: string[];
   passive: string;

@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import path from 'path';
 import { getCards, CardQueryParams } from './database';
 
 const app = express();
@@ -7,6 +8,9 @@ const port = 3000;
 
 app.use(express.json());
 app.use(cors());
+
+// resources 폴더를 정적 파일로 제공
+app.use('/resources', express.static('/app/resources'));
 
 // 카드 정보를 반환하는 엔드포인트
 app.get('/api/cards', async (req, res) => {

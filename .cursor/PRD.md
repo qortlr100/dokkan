@@ -82,6 +82,10 @@ dokkanviewer
 - Docker 컨테이너로 배포
 - 프론트/백 분리 구성 (컨테이너 2개)
 - Nginx Reverse Proxy 통해 접근 도메인 분기 예정
+- 개발 환경 자동화 스크립트 제공
+  - PowerShell 기반 개발 환경 시작/중지 스크립트
+  - 실시간 코드 반영을 위한 볼륨 마운트 설정
+  - 개발용 Dockerfile 분리 구성
 
 ---
 
