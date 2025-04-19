@@ -1,5 +1,5 @@
 import React from 'react';
-import { getElementInfo, getElementName } from '@/constants/resourceMappings';
+import { getElementInfo } from '@/constants/resourceMappings';
 import { getElementColor } from '@/lib/colorUtils';
 import Image from 'next/image';
 
@@ -14,7 +14,7 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ card }) => {
   const elementInfo = getElementInfo(card.element);
-  const elementColor = getElementColor(elementInfo?.name || 'UNKNOWN');
+  const elementColor = getElementColor(elementInfo?.typeCode || 0);
 
   return (
     <div className="card" style={{ borderColor: elementColor }}>
@@ -29,7 +29,7 @@ const Card: React.FC<CardProps> = ({ card }) => {
       </div>
       <div className="card-info">
         <h3>{card.name}</h3>
-        <p>속성: {elementInfo?.description || getElementName(card.element)}</p>
+        <p>속성: {elementInfo?.typeName || '알 수 없음'}</p>
         <p>레어도: {card.rarity}</p>
       </div>
     </div>
